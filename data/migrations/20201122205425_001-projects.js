@@ -18,6 +18,11 @@ exports.up = function(knex) {
           tasks.increments()
           tasks.string("tasks_desc").notNullable().unique()
           tasks.string("tasks_notes", 128)
+          tasks.integer("project_id")
+              .references("id")
+              .inTable("projects")
+              .onDelete("CASCADE")
+              .onUpdate("CASCADE")
       })
 
       .createTable("project_resource", (pR) => {
